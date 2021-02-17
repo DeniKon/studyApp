@@ -1,0 +1,32 @@
+<p>edit-item works!</p>
+<p>Edit works</p>
+
+<p>Name: {{item.name}}</p>
+<form [formGroup]="formEdit" >
+
+  <div><label>Item id:
+    <input type="text" name="itemId" formControlName="id">
+  </label>
+  </div>
+  <div><label>Item name:
+    <input type="text" name="itemName" formControlName="name">
+  </label>
+  </div>
+  <div>
+    <label>Item description:
+      <input type="text" name="itemDescription" formControlName="description">
+    </label>
+  </div>
+  <div>
+    <label>Item price:
+      <input type="text" name="itemPrice" formControlName="price">
+    </label>
+  </div>
+  <div>
+    <label>Item count:
+      <input type="text" name="itemCount" formControlName="count">
+    </label>
+  </div>
+
+</form>
+<button (click)="saveChanges()">Save</button>
