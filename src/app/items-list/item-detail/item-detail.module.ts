@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
-import {Router, RouterModule} from '@angular/router';
-
+import {RouterModule} from '@angular/router';
+import {ItemDataResolver} from '../../core/item-data.resolver';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
   declarations: [ItemDetailComponent],
   imports: [
     CommonModule,
+    MatCardModule,
+    MatButtonModule,
     RouterModule.forChild([
-      {path: '', component: ItemDetailComponent},
-      // {path: ':id', component: ItemDetailComponent}
+      {path: '', component: ItemDetailComponent, resolve: {item: ItemDataResolver}},
     ])
   ],
   exports: [RouterModule]

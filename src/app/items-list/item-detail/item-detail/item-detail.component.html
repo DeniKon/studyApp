@@ -1,3 +1,11 @@
-<p>item-detail works!</p>
-<p>Name: {{item.name}}</p>
-<p>Description: {{item.description}}</p>
+<mat-card>
+    <p>Id: {{item.id}}</p>
+    <p>Name: {{item.name}}</p>
+    <p>Description: {{item.description}}</p>
+    <p>Price: {{item.price}}</p>
+    <p>Count: {{item.count}}</p>
+    <p>Total: {{item.total}}</p>
+  <mat-card-actions>
+    <button mat-button routerLink="">Back</button>
+  </mat-card-actions>
+</mat-card>

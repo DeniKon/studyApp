@@ -22,6 +22,11 @@ export class ListComponent implements OnInit {
   deleteItem(itemId: number): void {
     this.dataItemsService.deleteItem(itemId).subscribe();
   }
+  confirmBeforeDelete(itemId: number): void{
+    if (confirm('Are you sure you want to delete this item')){
+      this.deleteItem(itemId);
+    }
+  }
 
   ngOnInit(): void {
     this.total$ = this.items$.pipe(map(item => item.reduce((acc, val) => acc + val.total, 0)));

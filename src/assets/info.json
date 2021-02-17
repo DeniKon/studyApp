@@ -2,7 +2,7 @@
   "items": [
     {
       "id": 8,
-      "name": "Item812121",
+      "name": "777",
       "description": "Description of the Item 8",
       "price": 8,
       "count": 10,
@@ -10,7 +10,7 @@
     },
     {
       "id": 9,
-      "name": "Item9",
+      "name": "777",
       "description": "Description of the Item 9",
       "price": 9,
       "count": 10,
@@ -18,7 +18,7 @@
     },
     {
       "id": 10,
-      "name": "Item10",
+      "name": "111",
       "description": "Description of the Item 10",
       "price": 10,
       "count": 10,
@@ -47,14 +47,6 @@
       "count": "20",
       "total": 400,
       "id": 13
-    },
-    {
-      "name": "asdfsdfsdf",
-      "description": "dfasdfsdfdsfs",
-      "price": "9",
-      "count": "9",
-      "total": 81,
-      "id": 14
     }
   ]
 }

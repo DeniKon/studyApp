@@ -30,7 +30,6 @@ export class EditItemComponent implements OnInit {
   }
   ngOnInit(): void {
     this.formSubscription = this.formEdit.valueChanges.subscribe(item => this.item = item);
-    console.log(this.item);
   }
   saveChanges(): void {
     this.item.total = this.item.price * this.item.count;

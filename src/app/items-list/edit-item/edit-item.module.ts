@@ -4,6 +4,10 @@ import { EditItemComponent } from './edit-item/edit-item.component';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ItemDataResolver} from '../../core/item-data.resolver';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+
 
 
 
@@ -12,9 +16,11 @@ import {ItemDataResolver} from '../../core/item-data.resolver';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
     RouterModule.forChild([
       {path: '', component: EditItemComponent, resolve: {item: ItemDataResolver}},
-      {path: '/:id', component: EditItemComponent, resolve: {item: ItemDataResolver}}
       ])
   ]
 })
