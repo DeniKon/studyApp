@@ -5,17 +5,17 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import {ItemsDataService} from './items-data.service';
-import {Item} from '../shared/models/item';
+import {ItemsDataService} from '../../core/services/items-data.service';
+import {Item} from '../models/item';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemDataResolver implements Resolve<Item> {
-  constructor(private itemsDataservise: ItemsDataService) {
+  constructor(private itemsDataService: ItemsDataService) {
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Item> {
     const id = route.paramMap.get('id');
-    return this.itemsDataservise.getItem(+id);
+    return this.itemsDataService.getItem(+id);
   }
 }

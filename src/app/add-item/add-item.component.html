@@ -1,0 +1,30 @@
+
+<div class="container">
+  <div class="form-container">
+    <form [formGroup]="form">
+      <mat-form-field class="form-field">
+        <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Description</mat-label>
+        <input matInput type="text" formControlName="description">
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Price</mat-label>
+        <input matInput type="text" formControlName="price">
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Count</mat-label>
+        <input matInput type="text" formControlName="count">
+      </mat-form-field>
+    </form>
+    <button mat-button (click)="save()">Save</button>
+  </div>
+</div>
+
+
+

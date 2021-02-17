@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {Item} from '../../../shared/models/item';
-import {ItemDetailComponent} from '../../item-detail/item-detail/item-detail.component';
-import {ItemsDataService} from '../../../core/items-data.service';
+import {Item} from '../shared/models/item';
+import {ItemDetailComponent} from '../item-detail/item-detail.component';
+import {ItemsDataService} from '../core/services/items-data.service';
 
 @Component({
   selector: 'app-add-item',

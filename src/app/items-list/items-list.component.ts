@@ -1,23 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {Item} from '../../shared/models/item';
-import {ItemsDataService} from '../../core/items-data.service';
+import {Item} from '../shared/models/item';
+import {ItemsDataService} from '../core/services/items-data.service';
 import {map} from 'rxjs/operators';
-
 
 
 @Component({
   selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  templateUrl: './items-list.component.html',
+  styleUrls: ['./items-list.component.scss']
 })
-export class ListComponent implements OnInit {
-
+export class ItemsListComponent implements OnInit {
   items$: Observable<Item[]> = this.dataItemsService.items$;
   total$: Observable<number>;
-  displayedColumns: string[] = ['itemName', 'itemDescription', 'itemPrice', 'itemCount', 'itemTotal', 'itemDeleteLink', 'itemEditLink', 'itemDetailLink'];
+  displayedColumns: string[] = [
+    'itemName',
+    'itemDescription',
+    'itemPrice',
+    'itemCount',
+    'itemTotal',
+    'itemDeleteLink',
+    'itemEditLink',
+    'itemDetailLink'
+  ];
 
-  constructor(private dataItemsService: ItemsDataService) { }
+ // subject hot cold stream
+
+  constructor(
+    private dataItemsService: ItemsDataService
+  ) {
+  }
 
   deleteItem(itemId: number): void {
     this.dataItemsService.deleteItem(itemId).subscribe();

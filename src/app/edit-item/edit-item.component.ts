@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Item} from '../../../shared/models/item';
-import {ItemsDataService} from '../../../core/items-data.service';
+import {Item} from '../shared/models/item';
+import {ItemsDataService} from '../core/services/items-data.service';
 import {ActivatedRoute} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {FormControl, FormGroup} from '@angular/forms';

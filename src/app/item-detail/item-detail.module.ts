@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ItemDetailComponent } from './item-detail/item-detail.component';
+import { ItemDetailComponent } from './item-detail.component';
 import {RouterModule} from '@angular/router';
-import {ItemDataResolver} from '../../core/item-data.resolver';
+import {ItemDataResolver} from '../shared/resolvers/item-data.resolver';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 
