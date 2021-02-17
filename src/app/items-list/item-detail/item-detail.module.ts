@@ -9,8 +9,10 @@ import {Router, RouterModule} from '@angular/router';
   declarations: [ItemDetailComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild([{path: '', component: ItemDetailComponent},
-      {path: '/:id', component: ItemDetailComponent}])
+    RouterModule.forChild([
+      {path: '', component: ItemDetailComponent},
+      // {path: ':id', component: ItemDetailComponent}
+    ])
   ],
   exports: [RouterModule]
 })

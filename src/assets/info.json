@@ -2,7 +2,7 @@
   "items": [
     {
       "id": 8,
-      "name": "Item8",
+      "name": "Item812121",
       "description": "Description of the Item 8",
       "price": 8,
       "count": 10,
@@ -25,20 +25,36 @@
       "total": 100
     },
     {
-      "name": "item1",
+      "id": 11,
+      "name": "item1 name changed",
       "description": "this is description of ",
-      "price": "11",
-      "count": "11",
-      "total": 121,
-      "id": 11
+      "price": "1",
+      "count": "1",
+      "total": 1
     },
     {
-      "id": 12,
-      "name": "Name Chanched",
-      "description": "",
-      "price": 0,
-      "count": 0,
-      "total": 0
+      "name": "retwertert",
+      "description": "dsfdsfasdfasd",
+      "price": "10",
+      "count": "10",
+      "total": 100,
+      "id": 12
+    },
+    {
+      "name": "dsfsdf",
+      "description": "adfgdsfasdfsd",
+      "price": "20",
+      "count": "20",
+      "total": 400,
+      "id": 13
+    },
+    {
+      "name": "asdfsdfsdf",
+      "description": "dfasdfsdfdsfs",
+      "price": "9",
+      "count": "9",
+      "total": 81,
+      "id": 14
     }
   ]
 }

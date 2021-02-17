@@ -23,11 +23,11 @@ export class ItemsDataService {
     const itemUrl = `items/${id}`;
     return this.http.delete<Item>(itemUrl);
   }
-  addItem(item: Item): Observable<Item>{
-    return this.http.post<Item>('items', item);
+  addItem(item: Item): any{
+    return this.http.post<Item>('items', item)
   }
-  editItem(item: Item): Observable<Item>{
+  editItem(item: Item):any{
     const itemUrl = `items/${item.id}`;
-    return this.http.put<Item>(itemUrl, item);
+    return this.http.put<Item>(itemUrl, item).subscribe();
   }
 }
