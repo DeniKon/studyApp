@@ -4,25 +4,25 @@
     <form [formGroup]="form">
       <mat-form-field class="form-field">
         <mat-label>Name</mat-label>
-          <input matInput type="text" formControlName="name">
+          <input matInput type="text" [formControl]="name">
       </mat-form-field>
 
       <mat-form-field class="form-field">
         <mat-label>Description</mat-label>
-        <input matInput type="text" formControlName="description">
+        <input matInput type="text" [formControl]="description">
       </mat-form-field>
 
       <mat-form-field class="form-field">
         <mat-label>Price</mat-label>
-        <input matInput type="text" formControlName="price">
+        <input matInput type="text" [formControl]="price">
       </mat-form-field>
 
       <mat-form-field class="form-field">
         <mat-label>Count</mat-label>
-        <input matInput type="text" formControlName="count">
+        <input matInput type="text" [formControl]="count">
       </mat-form-field>
     </form>
-    <button mat-button (click)="save()">Save</button>
+    <button mat-button (click)="save()" [routerLink]="'/'">Save</button>
   </div>
 </div>
 

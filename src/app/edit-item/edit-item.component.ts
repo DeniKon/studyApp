@@ -15,7 +15,10 @@ export class EditItemComponent implements OnInit {
   formEdit: FormGroup;
   formSubscription: Subscription;
 
-  constructor(private dataItemsService: ItemsDataService, private route: ActivatedRoute) {
+  constructor(
+    private dataItemsService: ItemsDataService,
+    private route: ActivatedRoute
+  ) {
     // this.getItem().subscribe(item => this.item = item);
     this.route.data.subscribe(response => this.item = response.item);
     this.formEdit = new FormGroup({
@@ -27,6 +30,18 @@ export class EditItemComponent implements OnInit {
       total: new FormControl()
     });
     this.formEdit.setValue(this.item);
+  }
+  get name(): FormControl{
+    return this.formEdit.get('name') as FormControl;
+  }
+  get description(): FormControl{
+    return this.formEdit.get('description') as FormControl;
+  }
+  get price(): FormControl{
+    return this.formEdit.get('price') as FormControl;
+  }
+  get count(): FormControl{
+    return this.formEdit.get('count') as FormControl;
   }
   ngOnInit(): void {
     this.formSubscription = this.formEdit.valueChanges.subscribe(item => this.item = item);

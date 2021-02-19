@@ -3,7 +3,6 @@ import { PageNotFoundComponent } from './page-not-found.component';
 import { RouterModule } from '@angular/router';
 
 
-
 @NgModule({
   declarations: [PageNotFoundComponent],
   imports: [RouterModule.forChild([{path: '', component: PageNotFoundComponent}])

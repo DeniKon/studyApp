@@ -19,15 +19,15 @@ export class ItemsDataService {
     const itemUrl = `items/${id}`;
     return this.http.get<Item>(itemUrl);
   }
-  deleteItem(id: number): Observable<Item> {
+  deleteItem(id: number): any {
     const itemUrl = `items/${id}`;
-    return this.http.delete<Item>(itemUrl);
+    return this.http.delete(itemUrl);
   }
   addItem(item: Item): any{
-    return this.http.post<Item>('items', item);
+    return this.http.post('items', item);
   }
   editItem(item: Item): any{
     const itemUrl = `items/${item.id}`;
-    return this.http.put<Item>(itemUrl, item).subscribe();
+    return this.http.put(itemUrl, item).subscribe();
   }
 }

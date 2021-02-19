@@ -15,11 +15,24 @@ export class AddItemComponent implements OnInit {
     description: new FormControl(),
     price: new FormControl(),
     count: new FormControl(),
-    total: new FormControl(),
   });
+  get name(): FormControl{
+    return this.form.get('name') as FormControl;
+  }
+  get description(): FormControl{
+    return this.form.get('description') as FormControl;
+  }
+  get price(): FormControl{
+    return this.form.get('price') as FormControl;
+  }
+  get count(): FormControl{
+    return this.form.get('count') as FormControl;
+  }
 
   item: Item;
-  constructor(private dataItemsService: ItemsDataService) { }
+  constructor(
+    private dataItemsService: ItemsDataService
+  ) { }
 
   itemInit(): void{
     this.item = this.form.value;

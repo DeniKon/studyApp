@@ -2,27 +2,23 @@
   <div class="form-container">
     <form [formGroup]="formEdit" >
       <mat-form-field class="form-field">
-        <mat-label>Item id:</mat-label>
-        <input matInput type="text" name="itemId" formControlName="id">
-      </mat-form-field>
-      <mat-form-field class="form-field">
         <mat-label>Item name:</mat-label>
-        <input matInput type="text" name="itemName" formControlName="name">
+        <input matInput type="text" name="itemName" [formControl]="name">
       </mat-form-field>
       <mat-form-field class="form-field">
         <mat-label>Item description:</mat-label>
-        <input matInput type="text" name="itemDescription" formControlName="description">
+        <input matInput type="text" name="itemDescription" [formControl]="description">
       </mat-form-field>
       <mat-form-field class = "form-field">
         <mat-label>Item price:</mat-label>
-        <input matInput type="text" name="itemPrice" formControlName="price">
+        <input matInput type="text" name="itemPrice" [formControl]="price">
       </mat-form-field>
       <mat-form-field class = "form-field">
         <mat-label>Item count:</mat-label>
-        <input matInput type="text" name="itemCount" formControlName="count">
+        <input matInput type="text" name="itemCount" [formControl]="count">
       </mat-form-field>
     </form>
   </div>
-<button mat-button (click)="saveChanges()" routerLink="">Save</button>
-<button mat-button routerLink="">Back</button>
+<button mat-button (click)="saveChanges()" [routerLink]="'/'">Save</button>
+<button mat-button [routerLink]="'/'">Back</button>
 </div>
