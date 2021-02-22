@@ -3,7 +3,7 @@
     <div class="addButtonWrapper">
       <button mat-button [routerLink]="'add'">Add</button>
     </div>
-    <table mat-table [dataSource]="items | async" class="mat-elevation-z8">
+    <table mat-table [dataSource]="items$ | async" class="mat-elevation-z8">
       <ng-container matColumnDef="itemName">
         <th mat-header-cell *matHeaderCellDef> Name </th>
         <td mat-cell *matCellDef="let item"> {{item.name}} </td>
@@ -27,7 +27,7 @@
       <ng-container matColumnDef="itemTotal">
         <th mat-header-cell *matHeaderCellDef> Total </th>
         <td mat-cell *matCellDef="let item"> {{item.total | currency}} </td>
-        <td mat-footer-cell *matFooterCellDef>{{total | async | currency}}</td>
+        <td mat-footer-cell *matFooterCellDef>{{total$ | async | currency}}</td>
       </ng-container>
       <ng-container matColumnDef="itemDetailLink">
         <th mat-header-cell *matHeaderCellDef></th>

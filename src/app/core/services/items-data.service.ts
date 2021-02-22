@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable, Subject, Subscription} from 'rxjs';
 import {Item} from '../../shared/models/item';
 import {HttpClient} from '@angular/common/http';
 
@@ -7,13 +7,13 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class ItemsDataService {
-  items$: Observable<Item[]>;
-  constructor(private http: HttpClient) {
-    this.items$ = this.getItems();
-  }
+  // tslint:disable-next-line:variable-name
+  private _items: Subject<Item[]> = new BehaviorSubject<Item[]>([]);
+  public readonly items: Observable<Item[]> = this._items.asObservable();
+  constructor(private http: HttpClient) {}
 
-  getItems(): Observable<Item[]> {
-    return this.http.get<Item[]>('items');
+  getItems(): Subscription {
+    return this.http.get<Item[]>('items').subscribe(items => this._items.next(items));
   }
   getItem(id: number): Observable<Item> {
     const itemUrl = `items/${id}`;
@@ -21,10 +21,10 @@ export class ItemsDataService {
   }
   deleteItem(id: number): any {
     const itemUrl = `items/${id}`;
-    return this.http.delete(itemUrl);
+    return this.http.delete(itemUrl).subscribe();
   }
   addItem(item: Item): any{
-    return this.http.post('items', item);
+    return this.http.post('items', item).subscribe();
   }
   editItem(item: Item): any{
     const itemUrl = `items/${item.id}`;

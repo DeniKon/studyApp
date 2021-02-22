@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Item} from '../shared/models/item';
 import {ItemDetailComponent} from '../item-detail/item-detail.component';
 import {ItemsDataService} from '../core/services/items-data.service';
@@ -11,10 +11,10 @@ import {ItemsDataService} from '../core/services/items-data.service';
 })
 export class AddItemComponent implements OnInit {
   form: FormGroup = new FormGroup({
-    name: new FormControl(),
-    description: new FormControl(),
-    price: new FormControl(),
-    count: new FormControl(),
+    name: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
+    price: new FormControl('', Validators.required),
+    count: new FormControl('', Validators.required),
   });
   get name(): FormControl{
     return this.form.get('name') as FormControl;
@@ -35,16 +35,19 @@ export class AddItemComponent implements OnInit {
   ) { }
 
   itemInit(): void{
-    this.item = this.form.value;
-    this.item.total = this.item.count  * this.item.price;
+      this.item = this.form.value;
+      this.item.total = this.item.count  * this.item.price;
   }
   addItem(item: Item): void{
-    this.dataItemsService.addItem(item).subscribe();
+    this.dataItemsService.addItem(item);
   }
 
   save(): void{
-    this.itemInit();
-    this.addItem(this.item);
+    if (!this.form.invalid) {
+      this.itemInit();
+      console.log(this.item);
+      this.addItem(this.item);
+    }
   }
   ngOnInit(): void {
   }

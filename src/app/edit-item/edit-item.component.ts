@@ -19,7 +19,6 @@ export class EditItemComponent implements OnInit {
     private dataItemsService: ItemsDataService,
     private route: ActivatedRoute
   ) {
-    // this.getItem().subscribe(item => this.item = item);
     this.route.data.subscribe(response => this.item = response.item);
     this.formEdit = new FormGroup({
       id: new FormControl(),
