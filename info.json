@@ -1,86 +1,6 @@
 {
   "items": [
     {
-      "id": 14,
-      "name": "name",
-      "description": "description1",
-      "price": "19",
-      "count": "10",
-      "total": 190
-    },
-    {
-      "name": "name2",
-      "description": "desc2",
-      "price": "3",
-      "count": "3",
-      "total": 9,
-      "id": 15
-    },
-    {
-      "id": 16,
-      "name": "name3",
-      "description": "Description of the Item 511",
-      "price": "10",
-      "count": "10",
-      "total": 100
-    },
-    {
-      "name": "name4",
-      "description": "description4",
-      "price": "10",
-      "count": "10",
-      "total": 100,
-      "id": 17
-    },
-    {
-      "name": "name4",
-      "description": "description4",
-      "price": "10",
-      "count": "10",
-      "total": 100,
-      "id": 18
-    },
-    {
-      "name": "name6",
-      "description": "desc6",
-      "price": "10",
-      "count": "10",
-      "total": 100,
-      "id": 20
-    },
-    {
-      "name": "item7",
-      "description": "desc7",
-      "price": "5",
-      "count": "5",
-      "total": 25,
-      "id": 21
-    },
-    {
-      "name": "name6",
-      "description": "description1",
-      "price": "10",
-      "count": "10",
-      "total": 100,
-      "id": 22
-    },
-    {
-      "name": "name2",
-      "description": "description1",
-      "price": "10",
-      "count": "10",
-      "total": 100,
-      "id": 23
-    },
-    {
-      "name": "item7",
-      "description": "desc7",
-      "price": "5",
-      "count": "5",
-      "total": 25,
-      "id": 24
-    },
-    {
       "name": "new",
       "description": "new",
       "price": "8",
@@ -111,6 +31,14 @@
       "count": "10",
       "total": 100,
       "id": 28
+    },
+    {
+      "name": "name1",
+      "description": "description1",
+      "price": "3",
+      "count": "3",
+      "total": 9,
+      "id": 29
     }
   ]
 }

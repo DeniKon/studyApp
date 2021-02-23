@@ -1,8 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { Observable } from 'rxjs';
 import { Item } from '../shared/models/item';
 import { ItemsDataService } from '../core/services/items-data.service';
 import { map } from 'rxjs/operators';
+
 
 
 @Component({

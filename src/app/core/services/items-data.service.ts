@@ -21,7 +21,8 @@ export class ItemsDataService {
   }
   deleteItem(id: number): any {
     const itemUrl = `items/${id}`;
-    return this.http.delete(itemUrl).subscribe();
+    this.http.delete(itemUrl).subscribe();
+    this.getItems();
   }
   addItem(item: Item): any{
     return this.http.post('items', item).subscribe();

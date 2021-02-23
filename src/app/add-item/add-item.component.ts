@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Item} from '../shared/models/item';
-import {ItemDetailComponent} from '../item-detail/item-detail.component';
 import {ItemsDataService} from '../core/services/items-data.service';
 
 @Component({
@@ -9,7 +8,8 @@ import {ItemsDataService} from '../core/services/items-data.service';
   templateUrl: './add-item.component.html',
   styleUrls: ['./add-item.component.scss']
 })
-export class AddItemComponent implements OnInit {
+export class AddItemComponent{
+  item: Item;
   form: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
@@ -28,12 +28,9 @@ export class AddItemComponent implements OnInit {
   get count(): FormControl{
     return this.form.get('count') as FormControl;
   }
-
-  item: Item;
   constructor(
     private dataItemsService: ItemsDataService
   ) { }
-
   itemInit(): void{
       this.item = this.form.value;
       this.item.total = this.item.count  * this.item.price;
@@ -41,15 +38,8 @@ export class AddItemComponent implements OnInit {
   addItem(item: Item): void{
     this.dataItemsService.addItem(item);
   }
-
   save(): void{
-    if (!this.form.invalid) {
       this.itemInit();
-      console.log(this.item);
       this.addItem(this.item);
-    }
   }
-  ngOnInit(): void {
-  }
-
 }
