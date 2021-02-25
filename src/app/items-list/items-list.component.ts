@@ -12,8 +12,8 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./items-list.component.scss']
 })
 export class ItemsListComponent implements OnInit, OnDestroy {
-  items$: Observable<Item[]> = this.dataItemsService.items;
-  total$: Observable<number> = this.dataItemsService.items.
+  items$: Observable<Item[]> = this.dataItemsService.items$;
+  total$: Observable<number> = this.dataItemsService.items$.
                             pipe(map(items => items.reduce((acc, val) => acc + val.total, 0)));
 
   displayedColumns: string[] = [
@@ -31,7 +31,11 @@ export class ItemsListComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataItemsService: ItemsDataService
-  ) {}
+  ) {
+    // this.items$.subscribe(res => {
+    //   debugger
+    // })
+  }
 
   deleteItem(itemId: number): Observable<object> {
     return this.dataItemsService.deleteItem(itemId);

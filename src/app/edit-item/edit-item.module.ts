@@ -7,6 +7,7 @@ import {ItemDataResolver} from '../shared/resolvers/item-data.resolver';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {GoBackGuard} from '../shared/guards/go-back.guard';
 
 
 
