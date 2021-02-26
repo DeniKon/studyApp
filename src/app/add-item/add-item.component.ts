@@ -14,7 +14,6 @@ import {Router} from '@angular/router';
 export class AddItemComponent implements OnInit, OnDestroy{
   addItemSubj$ = new Subject<boolean>();
   subscription: Subscription;
-  item: Item;
   form: FormGroup = new FormGroup(
     {
     name: new FormControl('', Validators.required),

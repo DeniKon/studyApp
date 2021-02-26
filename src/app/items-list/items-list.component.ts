@@ -1,8 +1,9 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import { Observable } from 'rxjs';
+import {Observable, Subject, Subscription} from 'rxjs';
 import { Item } from '../shared/models/item';
 import { ItemsDataService } from '../core/services/items-data.service';
-import { map } from 'rxjs/operators';
+import {map, switchMap} from 'rxjs/operators';
+import {ActionType} from '../core/enums/actionType';
 
 
 
@@ -12,9 +13,12 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./items-list.component.scss']
 })
 export class ItemsListComponent implements OnInit, OnDestroy {
-  items$: Observable<Item[]> = this.dataItemsService.items$;
-  total$: Observable<number> = this.dataItemsService.items$.
+  deletedItemsIds: number;
+  deleteSubscription: Subscription;
+  items$: Observable<Item[]> = this.dataItemsService.displayedItems$;
+  total$: Observable<number> = this.dataItemsService.displayedItems$.
                             pipe(map(items => items.reduce((acc, val) => acc + val.total, 0)));
+  deleteItemSubject$ = new Subject<any>();
 
   displayedColumns: string[] = [
     'itemName',
@@ -26,38 +30,26 @@ export class ItemsListComponent implements OnInit, OnDestroy {
     'itemEditLink',
     'itemDetailLink'
   ];
-
- // subject hot cold stream
-
-  constructor(
-    private dataItemsService: ItemsDataService
-  ) {
-    // this.items$.subscribe(res => {
-    //   debugger
-    // })
-  }
-
-  deleteItem(itemId: number): Observable<object> {
-    return this.dataItemsService.deleteItem(itemId);
+  constructor(private dataItemsService: ItemsDataService) {
   }
   confirmBeforeDelete(itemId: number): any{
     if (confirm('Are you sure you want to delete this item')){
-      this.deleteItem(itemId);
+      this.deleteItemSubject$.next(itemId);
     }
   }
 
   ngOnInit(): void {
     this.dataItemsService.getItems();
-    // this.itemsSubject.subscribe(items => this.items = items);
-    // this.itemsSubject.subscribe(items => this.total = items.reduce((acc, val) => acc + val.total, 0));
-    // this.subscription = this.dataItemsService.getItems().subscribe(this.itemsSubject);
-    // this.total$ = this.items$.pipe(map(items => items.reduce((acc, val) => acc + val.total, 0)));
-    // this.itemsSubject.subscribe(items => this.items = items);
-    // this.itemsSubject.subscribe(items => this.total = items.pipe(map(itemsList => itemsList.reduce((acc, val) => acc + val.total, 0))));
-    // this.itemsSubject.next(this.dataItemsService.getItems());
+    this.deleteSubscription = this.deleteItemSubject$.
+    pipe(
+      switchMap(id => this.dataItemsService.deleteItem(id).pipe(
+        map(() => id)
+      ))).
+      subscribe((id) => {
+        this.dataItemsService.deletedItem$.next({payload: id, action: ActionType.RemoveItem});
+    });
   }
   ngOnDestroy(): void{
-    // this.subscription.unsubscribe();
+    this.deleteSubscription.unsubscribe();
   }
-
 }

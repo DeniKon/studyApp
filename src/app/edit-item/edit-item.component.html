@@ -3,22 +3,26 @@
     <form [formGroup]="formEdit" >
       <mat-form-field class="form-field">
         <mat-label>Item name:</mat-label>
-        <input matInput type="text" name="itemName" [formControl]="name">
+        <input matInput type="text" name="itemName" [formControlName]="'name'">
       </mat-form-field>
       <mat-form-field class="form-field">
         <mat-label>Item description:</mat-label>
-        <input matInput type="text" name="itemDescription" [formControl]="description">
+        <input matInput type="text" name="itemDescription" [formControlName]="'description'">
       </mat-form-field>
       <mat-form-field class = "form-field">
         <mat-label>Item price:</mat-label>
-        <input matInput type="number" name="itemPrice" [formControl]="price">
+        <input matInput type="number" name="itemPrice" [formControlName]="'price'">
       </mat-form-field>
       <mat-form-field class = "form-field">
         <mat-label>Item count:</mat-label>
-        <input matInput type="number" name="itemCount" [formControl]="count">
+        <input matInput type="number" name="itemCount" [formControlName]="'count'">
       </mat-form-field>
     </form>
   </div>
-<button mat-button (click)="saveChanges()" [routerLink]="['/']">Save</button>
+<button mat-button
+        (click)="saveChanges()"
+        [disabled]="!(isButtonSaveEnabled$ | async) || formEdit.invalid">Save
+</button>
 <button mat-button [routerLink]="['/']">Back</button>
+  <button mat-button (click)="resetChanges()">Reset changes</button>
 </div>
