@@ -1,28 +1,17 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { EditItemComponent } from './edit-item.component';
-import {RouterModule} from '@angular/router';
-import {ReactiveFormsModule} from '@angular/forms';
-import {ItemDataResolver} from '../shared/resolvers/item-data.resolver';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {GoBackGuard} from '../shared/guards/go-back.guard';
-
-
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { EditItemRoutingModule } from './edit-item-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [EditItemComponent],
   imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    RouterModule.forChild([
-      {path: '', component: EditItemComponent, resolve: {item: ItemDataResolver}},
-      ])
-  ]
+    EditItemRoutingModule,
+    SharedModule,
+  ],
 })
-export class EditItemModule { }
+export class EditItemModule {}

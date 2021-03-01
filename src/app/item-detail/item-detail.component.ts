@@ -1,17 +1,17 @@
-import { Component } from '@angular/core';
-import {Item} from '../shared/models/item';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Item } from '../shared/models/item';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-item-detail',
   templateUrl: './item-detail.component.html',
-  styleUrls: ['./item-detail.component.scss']
 })
-export class ItemDetailComponent {
-  item: Item = {id: 0, name: '', description: '', price: 0, count: 0, total: 0};
-  constructor(
-    private route: ActivatedRoute
-  ) {
-    this.route.data.subscribe(response => this.item = response.item);
+export class ItemDetailComponent implements OnInit {
+  itemDetail$: Observable<Item>;
+  constructor(private route: ActivatedRoute) {}
+  ngOnInit(): void {
+    this.itemDetail$ = this.route.data.pipe(map((data) => data.item));
   }
 }

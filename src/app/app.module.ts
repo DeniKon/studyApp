@@ -7,11 +7,8 @@ import { HeaderModule } from './header/header.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UrlPrefixInterceptor } from './core/interceptors/url-prefix.interceptor';
 
-
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -19,11 +16,13 @@ import { UrlPrefixInterceptor } from './core/interceptors/url-prefix.interceptor
     HttpClientModule,
     HeaderModule,
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: UrlPrefixInterceptor,
-    multi: true
-  }],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UrlPrefixInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
