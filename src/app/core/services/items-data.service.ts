@@ -4,6 +4,9 @@ import { Item } from '../../shared/models/item';
 import { HttpClient } from '@angular/common/http';
 import { map, scan, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { ActionType } from '../../shared/models/enums/actionType';
+import { Select, Store } from '@ngxs/store';
+import { GetItems, GetItem, AddItem, DeleteItem, UpdateItem } from '../store/items/items.actions';
+import { ItemsGetterState } from '../store/items/items-getter.state';
 
 @Injectable({
   providedIn: 'root',
@@ -12,58 +15,46 @@ export class ItemsDataService {
   deletedItem$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   addedItem$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   displayedItems$: Observable<Item[]>;
-  items$: Observable<any>;
-  replaySubject = new ReplaySubject<number>();
 
-  constructor(private http: HttpClient) {
-    this.items$ = this.replaySubject.pipe(
-      switchMap((params) => {
-        return this.http.get<Item[]>('items');
-      }),
-      map((items) => ({ payload: items, action: ActionType.SetItems })),
-      shareReplay()
-    );
+  @Select(ItemsGetterState.getItems)
+  items$: Observable<Item[]>;
 
-    this.displayedItems$ = merge(
-      this.items$,
-      this.deletedItem$,
-      this.addedItem$
-    ).pipe(
-      scan((acc: Item[], emit: { payload: any; action: ActionType }) => {
-        switch (emit?.action) {
-          case ActionType.RemoveItem: {
-            return acc.filter((item) => item.id !== emit.payload);
-          }
-          case ActionType.SetItems: {
-            return emit.payload;
-          }
-          // case ActionType.AddItem: {
-          //   return acc.push(emit.payload);
-          // }
-          default: {
-            return [];
-          }
-        }
-      }, [])
-    );
+  constructor(private http: HttpClient, private store: Store) {
+    this.getItems();
   }
 
-  getItems(params?: number): void {
-    this.replaySubject.next(params);
+  getItems(): void {
+    this.store.dispatch(new GetItems());
   }
-  getItem(id: number): Observable<Item> {
-    const itemUrl = `items/${id}`;
-    return this.http.get<Item>(itemUrl);
+  getItem(id: number) {
+    this.store.dispatch(new GetItem());
   }
-  deleteItem(id: number): Observable<any> {
-    const itemUrl = `items/${id}`;
-    return this.http.delete(itemUrl);
+  addItem(newItem: Item){
+    return this.store.dispatch(new AddItem(newItem));
   }
-  addItem(item: Item): Observable<any> {
-    return this.http.post<any>('items', item);
+  deleteItem(itemId: number){
+   return this.store.dispatch(new DeleteItem(itemId));
+  
   }
-  editItem(item: Item): Observable<any> {
-    const itemUrl = `items/${item.id}`;
-    return this.http.put<any>(itemUrl, item);
+  editItem(item:Item) {
+    this.store.dispatch(new UpdateItem(item));
   }
+  // fetchItems(){
+  //   return this.http.get<Item[]>('items');
+  // }
+  // getItem(id: number): Observable<Item> {
+  //   const itemUrl = `items/${id}`;
+  //   return this.http.get<Item>(itemUrl);
+  // }
+  // deleteItem(id: number): Observable<any> {
+  //   const itemUrl = `items/${id}`;
+  //   return this.http.delete(itemUrl);
+  // }
+  // addItem(item: Item): Observable<any> {
+  //   return this.http.post<any>('items', item);
+  // }
+  // editItem(item: Item): Observable<any> {
+  //   const itemUrl = `items/${item.id}`;
+  //   return this.http.put<any>(itemUrl, item);
+  // }
 }

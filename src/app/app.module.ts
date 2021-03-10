@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderModule } from './header/header.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UrlPrefixInterceptor } from './core/interceptors/url-prefix.interceptor';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +16,7 @@ import { UrlPrefixInterceptor } from './core/interceptors/url-prefix.interceptor
     BrowserAnimationsModule,
     HttpClientModule,
     HeaderModule,
+    CoreModule,
   ],
   providers: [
     {

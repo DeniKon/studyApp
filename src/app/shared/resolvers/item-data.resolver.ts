@@ -18,6 +18,6 @@ export class ItemDataResolver implements Resolve<Item> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<Item> {
-    return this.itemsDataService.getItem(+route.params.id).pipe(take(1));
+    return //this.itemsDataService.getItem(+route.params.id).pipe(take(1));
   }
 }

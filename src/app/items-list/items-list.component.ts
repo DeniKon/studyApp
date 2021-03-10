@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, of, Subject, Subscription } from 'rxjs';
 import { Item } from '../shared/models/item';
 import { ItemsDataService } from '../core/services/items-data.service';
-import { map, switchMap } from 'rxjs/operators';
-import { ActionType } from '../shared/models/enums/actionType';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-list',
@@ -13,11 +14,12 @@ import { ActionType } from '../shared/models/enums/actionType';
 export class ItemsListComponent implements OnInit, OnDestroy {
   deletedItemsIds: number;
   deleteSubscription: Subscription;
-  items$: Observable<Item[]> = this.dataItemsService.displayedItems$;
-  total$: Observable<number> = this.dataItemsService.displayedItems$.pipe(
-    map((items) => items.reduce((acc, val) => acc + val.total, 0))
-  );
-  deleteItemSubject$ = new Subject<any>();
+  items$: Observable<Item[]> = this.dataItemsService.items$;
+  total$: Observable<number> = this.dataItemsService.items$.
+    pipe(map(items => items.reduce((acc, val) => acc + val.total, 0)));
+
+  deleteItemSubject$ = new Subject<number>();
+  dialogRef: MatDialogRef<ConfirmDialogComponent>;
 
   displayedColumns: string[] = [
     'itemName',
@@ -29,28 +31,33 @@ export class ItemsListComponent implements OnInit, OnDestroy {
     'itemEditLink',
     'itemDetailLink',
   ];
-  constructor(private dataItemsService: ItemsDataService) {}
+  constructor(
+    private dataItemsService: ItemsDataService,
+    public dialog: MatDialog) {
+  }
   confirmBeforeDelete(itemId: number): any {
-    if (confirm('Are you sure you want to delete this item')) {
-      this.deleteItemSubject$.next(itemId);
-    }
+    this.deleteItemSubject$.next(itemId);
+      //  this.dialogRef =  this.dialog.open(ConfirmDialogComponent, {data: itemId});
+      //  return this.dialogRef.afterClosed();
+    // if (confirm('Are you sure you want to delete this item')) {
+    //   this.deleteItemSubject$.next(itemId);
+    //}
   }
 
   ngOnInit(): void {
-    this.dataItemsService.getItems();
-    this.deleteSubscription = this.deleteItemSubject$
-      .pipe(
-        switchMap((id) =>
-          this.dataItemsService.deleteItem(id).pipe(map(() => id))
-        )
+    this.deleteSubscription = this.deleteItemSubject$.pipe(
+      switchMap((itemId) => {
+       const dialogRef =  this.dialog.open(ConfirmDialogComponent, {data: "Delete this item?"});
+       return dialogRef.afterClosed().pipe(
+        filter((res) => !!res),
+        map(() => itemId)
+       );
+      }),
+      switchMap((itemId) => this.dataItemsService.deleteItem(itemId))
       )
-      .subscribe((id) => {
-        this.dataItemsService.deletedItem$.next({
-          payload: id,
-          action: ActionType.RemoveItem,
-        });
-      });
+    .subscribe();
   }
+
   ngOnDestroy(): void {
     this.deleteSubscription.unsubscribe();
   }

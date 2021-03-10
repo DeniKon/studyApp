@@ -22,6 +22,7 @@
           name="itemPrice"
           formControlName="price"
         />
+        <div class="validation-error" *ngIf = 'price.errors?.negativeNumber'>enter positive number</div>
       </mat-form-field>
       <mat-form-field class="form-field">
         <mat-label>Item count:</mat-label>
@@ -31,6 +32,7 @@
           name="itemCount"
           formControlName="count"
         />
+        <div class="validation-error" *ngIf = 'count.errors?.negativeNumber'>enter positive number</div>
       </mat-form-field>
     </form>
   </div>
